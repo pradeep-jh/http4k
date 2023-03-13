@@ -1,5 +1,12 @@
 rootProject.name = "http4k"
 
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
 plugins {
     id("de.fayard.refreshVersions").version("0.40.2")
 }
@@ -57,6 +64,7 @@ include("http4k-contract")
 }
 
 include("http4k-graphql")
+include("http4k-grpc")
 include("http4k-incubator")
 include("http4k-jsonrpc")
 include("http4k-metrics-micrometer")

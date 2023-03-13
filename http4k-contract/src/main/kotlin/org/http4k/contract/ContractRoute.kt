@@ -20,7 +20,6 @@ import org.http4k.filter.ServerFilters
 import org.http4k.lens.LensFailure
 import org.http4k.lens.PathLens
 import org.http4k.routing.Router
-import org.http4k.routing.RouterDescription
 import org.http4k.routing.RouterMatch
 import org.http4k.routing.RouterMatch.MatchedWithoutHandler
 import org.http4k.routing.RouterMatch.MatchingHandler
@@ -38,10 +37,7 @@ class ContractRoute internal constructor(val method: Method,
     fun newRequest(baseUri: Uri) = Request(method, "").uri(baseUri.path(spec.describe(Root)))
 
     internal fun toRouter(contractRoot: PathSegments) = object : Router {
-
-        override fun toString() = description.description
-
-        override val description = RouterDescription(spec.describe(contractRoot))
+        override fun toString(): String = "${method.name}: ${spec.describe(contractRoot)}"
 
         override fun match(request: Request): RouterMatch =
             if ((request.method == OPTIONS || request.method == method) && request.pathSegments().startsWith(spec.pathFn(contractRoot))) {

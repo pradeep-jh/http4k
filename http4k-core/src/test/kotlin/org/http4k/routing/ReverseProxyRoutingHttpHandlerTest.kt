@@ -29,11 +29,7 @@ class ReverseProxyHandlerTest {
 }
 
 class ReverseProxyRoutingHttpHandlerTest : RoutingHttpHandlerContract() {
-    override val handler = reverseProxyRouting(
-        "host" to routes(validPath bind GET to { Response(OK) }),
-        "anotherHost" to routes(validPath bind GET to { Response(OK) }
-        )
-    )
+    override val handler = reverseProxyRouting("host" to routes(validPath bind GET to { Response(OK) }))
 
     private val otherHandler = reverseProxyRouting(hostFor("host1"), hostFor("host2"))
 

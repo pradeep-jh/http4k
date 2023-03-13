@@ -16,7 +16,6 @@ import org.http4k.lens.LensFailure
 import org.http4k.lens.Validator
 import org.http4k.routing.RoutedRequest
 import org.http4k.routing.RoutedResponse
-import org.http4k.routing.RouterDescription
 import org.http4k.routing.RouterMatch
 import org.http4k.routing.RouterMatch.MatchedWithoutHandler
 import org.http4k.routing.RouterMatch.MatchingHandler
@@ -50,10 +49,6 @@ data class ContractRoutingHttpHandler(
 
     override fun withBasePath(new: String) = copy(rootAsString = new + rootAsString)
 
-    override val description = RouterDescription(rootAsString,
-        routes.map { it.toRouter(PathSegments("$it$descriptionPath")).description }
-    )
-
     private val notFound = preSecurityFilter.then(
         security?.filter
             ?: Filter.NoOp
@@ -75,15 +70,7 @@ data class ContractRoutingHttpHandler(
             .let {
                 val extra =
                     listOfNotNull(if (includeDescriptionRoute) it bindContract GET to { _ -> Response(OK) } else null)
-                it bindContract GET to { _ ->
-                    renderer.description(
-                        contractRoot,
-                        security,
-                        routes + extra,
-                        tags,
-                        webhooks
-                    )
-                }
+                it bindContract GET to { _ -> renderer.description(contractRoot, security, routes + extra, tags, webhooks) }
             }
 
     private val routers = routes

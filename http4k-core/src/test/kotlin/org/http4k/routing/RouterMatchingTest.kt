@@ -1,7 +1,6 @@
 package org.http4k.routing
 
 import com.natpryce.hamkrest.assertion.assertThat
-import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.isA
 import org.http4k.core.Body
 import org.http4k.core.Method.GET
@@ -80,10 +79,9 @@ class RouterMatchingTest {
 
     @Test
     fun `generic router`() {
-        val router = { r: Request -> r.method == GET }.asRouter("foo")
+        val router = { r: Request -> r.method == GET }.asRouter()
         assertThat(router.match(Request(GET, "")), isA<MatchedWithoutHandler>())
         assertThat(router.match(Request(POST, "")), isA<Unmatched>())
-        assertThat(router.description, equalTo(RouterDescription("foo")))
     }
 
     @Test
