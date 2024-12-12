@@ -19,7 +19,7 @@ fun query(name: String, fn: (String) -> Boolean) =
 /**
  * Apply routing predicate to a query
  */
-fun query(name: String, value: String) = query(name) { it == value }
+fun query(name: String, value: String) = query(name, Matcher.equalTo(value))
 
 /**
  * Ensure all queries are present
@@ -36,7 +36,7 @@ fun header(name: String, fn: (String) -> Boolean) =
 /**
  * Apply routing predicate to a header
  */
-fun header(name: String, value: String) = header(name) { it == value }
+fun header(name: String, value: String) = header(name, Matcher.equalTo(value))
 
 /**
  * Ensure all headers are present
@@ -54,3 +54,12 @@ fun body(fn: (Body) -> Boolean) = { it: Request -> fn(it.body) }.asRouter("Body 
  */
 @JvmName("bodyMatches")
 fun body(fn: (String) -> Boolean) = { req: Request -> fn(req.bodyString()) }.asRouter("Body matching $fn")
+
+interface Matcher: (String) -> Boolean{
+    companion object{
+        fun equalTo(value: String) = object :Matcher{
+            override fun invoke(p1: String) = p1 == value
+            override fun toString(): String = value
+        }
+    }
+}
