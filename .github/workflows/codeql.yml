@@ -62,7 +62,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         ref: refs/tags/5.40.0.0
-    - run: echo "ZGVwZW5kZW5jaWVzIHsKICAgIAogICAgaW1wbGVtZW50YXRpb24ocGxhdGZvcm0oIm9yZy5odHRwNGs6aHR0cDRrLWJvbTo1LjQxLjAuMCIpKQoKICAgIGltcGxlbWVudGF0aW9uKCJvcmcuaHR0cDRrOmh0dHA0ay1jb3JlIikKICAgIGltcGxlbWVudGF0aW9uKCJvcmcuaHR0cDRrOmh0dHA0ay1zZXJ2ZXItdW5kZXJ0b3ciKQogICAgaW1wbGVtZW50YXRpb24oIm9yZy5odHRwNGs6aHR0cDRrLWNsaWVudC1hcGFjaGUiKQp9Cg==" | base -d > build.gradle
+    - run: echo "ZGVwZW5kZW5jaWVzIHsKICAgIAogICAgaW1wbGVtZW50YXRpb24ocGxhdGZvcm0oIm9yZy5odHRwNGs6aHR0cDRrLWJvbTo1LjQwLjAuMCIpKQoKICAgIGltcGxlbWVudGF0aW9uKCJvcmcuaHR0cDRrOmh0dHA0ay1jb3JlIikKICAgIGltcGxlbWVudGF0aW9uKCJvcmcuaHR0cDRrOmh0dHA0ay1zZXJ2ZXItdW5kZXJ0b3ciKQogICAgaW1wbGVtZW50YXRpb24oIm9yZy5odHRwNGs6aHR0cDRrLWNsaWVudC1hcGFjaGUiKQp9Cg==" | base -d > build.gradle
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
